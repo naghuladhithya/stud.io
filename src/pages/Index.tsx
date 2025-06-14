@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Brain, Heart, Calendar, MessageCircle, TrendingUp } from "lucide-react";
+import { Brain, Heart, Calendar, MessageCircle, Music } from "lucide-react";
 import StudyPlanner from '@/components/StudyPlanner';
 import RebootBot from '@/components/RebootBot';
-import Dashboard from '@/components/Dashboard';
+import MoodEnhance from '@/components/MoodEnhance';
 import WelcomeSection from '@/components/WelcomeSection';
 
 const Index = () => {
@@ -37,9 +37,9 @@ const Index = () => {
                 <MessageCircle className="w-4 h-4" />
                 Reboot Bot
               </TabsTrigger>
-              <TabsTrigger value="dashboard" className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4" />
-                Dashboard
+              <TabsTrigger value="mood-enhance" className="flex items-center gap-2">
+                <Music className="w-4 h-4" />
+                Mood Enhance
               </TabsTrigger>
             </TabsList>
 
@@ -55,8 +55,8 @@ const Index = () => {
               <RebootBot />
             </TabsContent>
 
-            <TabsContent value="dashboard" className="space-y-6">
-              <Dashboard />
+            <TabsContent value="mood-enhance" className="space-y-6">
+              <MoodEnhance />
             </TabsContent>
           </Tabs>
         </div>

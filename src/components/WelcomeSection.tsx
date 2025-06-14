@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Brain, Heart, Calendar, MessageCircle, TrendingUp, Sparkles } from "lucide-react";
+import { Brain, Heart, Calendar, MessageCircle, Music, Sparkles } from "lucide-react";
 
 interface WelcomeSectionProps {
   onGetStarted: () => void;
@@ -60,13 +60,13 @@ const WelcomeSection = ({ onGetStarted }: WelcomeSectionProps) => {
         <Card className="p-6 bg-white/60 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2 bg-gradient-to-r from-green-500 to-teal-500 rounded-lg">
-              <TrendingUp className="w-6 h-6 text-white" />
+              <Music className="w-6 h-6 text-white" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-800">Wellness Dashboard</h3>
+            <h3 className="text-xl font-semibold text-gray-800">Mood Enhance</h3>
           </div>
           <p className="text-gray-600">
-            Track your progress and emotional trends. Get insights into your study patterns 
-            and receive gentle reminders to take care of yourself.
+            Curated lofi beats and "Study With Me" videos tailored to your study session length. 
+            Perfect soundtracks to boost focus and create the ideal study atmosphere.
           </p>
         </Card>
       </div>
