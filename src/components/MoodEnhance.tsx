@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Music, Play, Headphones, Coffee, Moon, Sun, Sparkles, Clock, Users } from "lucide-react";
 
 const MoodEnhance = () => {
@@ -111,13 +112,13 @@ const MoodEnhance = () => {
   return (
     <div className="space-y-8">
       <div className="text-center space-y-3">
-        <h2 className="text-3xl font-bold text-slate-800 flex items-center justify-center gap-3">
+        <h2 className="text-3xl font-bold text-slate-800 dark:text-slate-100 flex items-center justify-center gap-3">
           <div className="p-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600">
             <Headphones className="w-6 h-6 text-white" />
           </div>
           Mood Enhance
         </h2>
-        <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+        <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
           Discover your perfect study soundtrack and focus companions from curated YouTube collections
         </p>
       </div>
@@ -129,13 +130,13 @@ const MoodEnhance = () => {
           onClick={() => setSelectedCategory('lofi')}
           className={`flex items-center gap-3 px-6 py-3 text-base font-medium transition-all duration-300 ${
             selectedCategory === 'lofi' 
-              ? 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg' 
-              : 'border-2 border-slate-300 hover:border-indigo-400 hover:bg-indigo-50'
+              ? 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg dark:shadow-indigo-500/25' 
+              : 'border-2 border-slate-300 dark:border-slate-600 hover:border-indigo-400 dark:hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200'
           }`}
         >
           <Music className="w-5 h-5" />
           Lofi Beats
-          <Badge variant="secondary" className="ml-1 bg-white/20 text-current">
+          <Badge variant="secondary" className="ml-1 bg-white/20 dark:bg-slate-700/50 text-current">
             {lofiBeats.length}
           </Badge>
         </Button>
@@ -144,94 +145,96 @@ const MoodEnhance = () => {
           onClick={() => setSelectedCategory('study')}
           className={`flex items-center gap-3 px-6 py-3 text-base font-medium transition-all duration-300 ${
             selectedCategory === 'study' 
-              ? 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg' 
-              : 'border-2 border-slate-300 hover:border-indigo-400 hover:bg-indigo-50'
+              ? 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg dark:shadow-indigo-500/25' 
+              : 'border-2 border-slate-300 dark:border-slate-600 hover:border-indigo-400 dark:hover:border-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200'
           }`}
         >
           <Users className="w-5 h-5" />
           Study With Me
-          <Badge variant="secondary" className="ml-1 bg-white/20 text-current">
+          <Badge variant="secondary" className="ml-1 bg-white/20 dark:bg-slate-700/50 text-current">
             {studyWithMe.length}
           </Badge>
         </Button>
       </div>
 
-      {/* Recommendations Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {getRecommendations().map((item, index) => (
-          <Card 
-            key={index} 
-            className={`group relative overflow-hidden bg-white border-0 shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer transform hover:-translate-y-1 ${
-              hoveredIndex === index ? 'ring-2 ring-indigo-400' : ''
-            }`}
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-white to-purple-50 opacity-60" />
-            <div className="relative p-5 space-y-4">
-              <div className="flex items-start justify-between">
-                <h3 className="font-semibold text-slate-800 leading-tight line-clamp-2 flex-1 group-hover:text-indigo-700 transition-colors">
-                  {item.title}
-                </h3>
+      {/* Recommendations Grid with Smooth Scrolling */}
+      <ScrollArea className="h-[800px] w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 p-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 cursor-grab active:cursor-grabbing">
+          {getRecommendations().map((item, index) => (
+            <Card 
+              key={index} 
+              className={`group relative overflow-hidden bg-white dark:bg-slate-800 border-0 shadow-md hover:shadow-xl dark:shadow-slate-900/50 dark:hover:shadow-slate-900/70 transition-all duration-500 cursor-pointer transform hover:-translate-y-1 hover:scale-[1.02] ${
+                hoveredIndex === index ? 'ring-2 ring-indigo-400 dark:ring-indigo-500' : ''
+              }`}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-indigo-950/30 dark:via-slate-800 dark:to-purple-950/30 opacity-60" />
+              <div className="relative p-5 space-y-4">
+                <div className="flex items-start justify-between">
+                  <h3 className="font-semibold text-slate-800 dark:text-slate-100 leading-tight line-clamp-2 flex-1 group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition-colors">
+                    {item.title}
+                  </h3>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openYouTube(item.videoId);
+                    }}
+                    className="ml-3 p-2 h-9 w-9 rounded-full bg-indigo-100 dark:bg-indigo-900/50 hover:bg-indigo-200 dark:hover:bg-indigo-800/70 text-indigo-600 dark:text-indigo-400 transition-all duration-300 hover:scale-110"
+                  >
+                    <Play className="w-4 h-4" />
+                  </Button>
+                </div>
+                
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-600 dark:text-slate-300 font-medium">{item.channel}</span>
+                  <div className="flex items-center gap-1 text-slate-500 dark:text-slate-400">
+                    <Clock className="w-3 h-3" />
+                    <span>{item.duration}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                  <span>
+                    {selectedCategory === 'lofi' 
+                      ? ('views' in item ? item.views : '') 
+                      : ('viewers' in item ? item.viewers : '')
+                    }
+                  </span>
+                  
+                  {selectedCategory === 'lofi' && 'mood' in item && (
+                    <div className="flex items-center gap-1.5 px-2 py-1 bg-white/50 dark:bg-slate-700/50 rounded-full">
+                      {getMoodIcon(item.mood)}
+                      <span className="capitalize text-slate-600 dark:text-slate-300 font-medium">{item.mood}</span>
+                    </div>
+                  )}
+                  
+                  {selectedCategory === 'study' && 'type' in item && (
+                    <Badge variant="secondary" className="capitalize bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 border-0">
+                      {item.type}
+                    </Badge>
+                  )}
+                </div>
+                
                 <Button
+                  onClick={() => openYouTube(item.videoId)}
+                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 dark:from-indigo-500 dark:to-purple-500 dark:hover:from-indigo-600 dark:hover:to-purple-600 text-white font-medium py-2.5 transition-all duration-300 shadow-md hover:shadow-lg dark:shadow-indigo-500/25"
                   size="sm"
-                  variant="ghost"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    openYouTube(item.videoId);
-                  }}
-                  className="ml-3 p-2 h-9 w-9 rounded-full bg-indigo-100 hover:bg-indigo-200 text-indigo-600 transition-all duration-300 hover:scale-110"
                 >
-                  <Play className="w-4 h-4" />
+                  <Play className="w-4 h-4 mr-2" />
+                  Watch on YouTube
                 </Button>
               </div>
-              
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-slate-600 font-medium">{item.channel}</span>
-                <div className="flex items-center gap-1 text-slate-500">
-                  <Clock className="w-3 h-3" />
-                  <span>{item.duration}</span>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between text-xs text-slate-500">
-                <span>
-                  {selectedCategory === 'lofi' 
-                    ? ('views' in item ? item.views : '') 
-                    : ('viewers' in item ? item.viewers : '')
-                  }
-                </span>
-                
-                {selectedCategory === 'lofi' && 'mood' in item && (
-                  <div className="flex items-center gap-1.5 px-2 py-1 bg-white/50 rounded-full">
-                    {getMoodIcon(item.mood)}
-                    <span className="capitalize text-slate-600 font-medium">{item.mood}</span>
-                  </div>
-                )}
-                
-                {selectedCategory === 'study' && 'type' in item && (
-                  <Badge variant="secondary" className="capitalize bg-indigo-100 text-indigo-700 border-0">
-                    {item.type}
-                  </Badge>
-                )}
-              </div>
-              
-              <Button
-                onClick={() => openYouTube(item.videoId)}
-                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium py-2.5 transition-all duration-300 shadow-md hover:shadow-lg"
-                size="sm"
-              >
-                <Play className="w-4 h-4 mr-2" />
-                Watch on YouTube
-              </Button>
-            </div>
-          </Card>
-        ))}
-      </div>
+            </Card>
+          ))}
+        </div>
+      </ScrollArea>
 
       {/* Study Tips */}
-      <Card className="relative overflow-hidden border-0 shadow-lg">
-        <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600" />
+      <Card className="relative overflow-hidden border-0 shadow-lg dark:shadow-slate-900/50">
+        <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-700 dark:via-purple-700 dark:to-pink-700" />
         <div className="relative p-8 text-center space-y-4">
           <div className="inline-flex p-3 rounded-full bg-white/20 backdrop-blur-sm">
             <Sparkles className="w-8 h-8 text-white" />
@@ -242,9 +245,9 @@ const MoodEnhance = () => {
             Remember to take breaks every 25-50 minutes using the Pomodoro technique!
           </p>
           <div className="flex justify-center gap-3 mt-6">
-            <Badge className="bg-white/20 text-white border-white/30 px-4 py-2">Focus Boost</Badge>
-            <Badge className="bg-white/20 text-white border-white/30 px-4 py-2">Stress Relief</Badge>
-            <Badge className="bg-white/20 text-white border-white/30 px-4 py-2">Productivity</Badge>
+            <Badge className="bg-white/20 text-white border-white/30 px-4 py-2 hover:bg-white/30 transition-colors cursor-pointer">Focus Boost</Badge>
+            <Badge className="bg-white/20 text-white border-white/30 px-4 py-2 hover:bg-white/30 transition-colors cursor-pointer">Stress Relief</Badge>
+            <Badge className="bg-white/20 text-white border-white/30 px-4 py-2 hover:bg-white/30 transition-colors cursor-pointer">Productivity</Badge>
           </div>
         </div>
       </Card>
